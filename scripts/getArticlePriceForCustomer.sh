@@ -1,4 +1,4 @@
-curl "http://localhost:8080/calculator/getarticlepriceforcustomer?articleId=article-1&customerId=customer-1"
+curl "http://localhost:8080/calculator/customers/customer-1/articles/article-1/price"
 
 # expected response:
 # 13.31
