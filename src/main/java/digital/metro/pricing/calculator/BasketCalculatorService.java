@@ -29,15 +29,15 @@ public class BasketCalculatorService {
         return new BasketCalculationResult(basket.getCustomerId(), pricedArticles, totalAmount);
     }
 
-    public BigDecimal calculateArticle(BasketEntry be, String customerId) {
-        String ArticleId = be.getArticleId();
+    public BigDecimal calculateArticle(BasketEntry basketEntry, String customerId) {
+        String articleId = basketEntry.getArticleId();
 
         if (customerId != null) {
-            BigDecimal customerPrice = priceRepository.getPriceByArticleIdAndCustomerId(ArticleId, customerId);
+            BigDecimal customerPrice = priceRepository.getPriceByArticleIdAndCustomerId(articleId, customerId);
             if (customerPrice != null) {
                 return customerPrice;
             }
         }
-        return priceRepository.getpricebyarticleId(ArticleId);
+        return priceRepository.getPriceByArticleId(articleId);
     }
 }

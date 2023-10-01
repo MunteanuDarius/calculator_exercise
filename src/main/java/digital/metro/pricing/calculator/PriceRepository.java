@@ -17,17 +17,17 @@ public class PriceRepository {
     private Map<String, BigDecimal> prices = new HashMap<>();
     private Random random = new Random();
 
-    public BigDecimal getpricebyarticleId(String articleId) {
+    public BigDecimal getPriceByArticleId(String articleId) {
         return prices.computeIfAbsent(articleId,
                 key -> BigDecimal.valueOf(0.5d + random.nextDouble() * 29.50d).setScale(2, RoundingMode.HALF_UP));
     }
 
-    public BigDecimal getPriceByArticleIdAndCustomerId(String id1, String id2) {
-        switch(id2) {
+    public BigDecimal getPriceByArticleIdAndCustomerId(String articleId, String customerId) {
+        switch(customerId) {
             case "customer-1":
-                return getpricebyarticleId(id1).multiply(new BigDecimal("0.90")).setScale(2, RoundingMode.HALF_UP);
+                return getPriceByArticleId(articleId).multiply(new BigDecimal("0.90")).setScale(2, RoundingMode.HALF_UP);
             case "customer-2":
-                return getpricebyarticleId(id1).multiply(new BigDecimal("0.85")).setScale(2, RoundingMode.HALF_UP);
+                return getPriceByArticleId(articleId).multiply(new BigDecimal("0.85")).setScale(2, RoundingMode.HALF_UP);
         }
 
         return null;
