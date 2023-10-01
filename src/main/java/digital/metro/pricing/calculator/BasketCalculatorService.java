@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -35,9 +36,9 @@ public class BasketCalculatorService {
         if (customerId != null) {
             BigDecimal customerPrice = priceRepository.getPriceByArticleIdAndCustomerId(articleId, customerId);
             if (customerPrice != null) {
-                return customerPrice;
+                return customerPrice.multiply(basketEntry.getQuantity()).setScale(2, RoundingMode.HALF_UP);
             }
         }
-        return priceRepository.getPriceByArticleId(articleId);
+        return priceRepository.getPriceByArticleId(articleId).multiply(basketEntry.getQuantity()).setScale(2, RoundingMode.HALF_UP);
     }
 }
