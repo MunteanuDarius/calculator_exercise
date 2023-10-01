@@ -1,13 +1,13 @@
 package digital.metro.pricing.calculator;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Component
+@Service
 public class BasketCalculatorService {
 
     private PriceRepository priceRepository;
@@ -24,7 +24,7 @@ public class BasketCalculatorService {
                         entry -> calculateArticle(entry, basket.getCustomerId())));
 
         BigDecimal totalAmount = pricedArticles.values().stream()
-                .reduce(BigDecimal.ZERO, (a, b) -> a.add(b));
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         return new BasketCalculationResult(basket.getCustomerId(), pricedArticles, totalAmount);
     }
