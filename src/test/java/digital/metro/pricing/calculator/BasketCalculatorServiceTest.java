@@ -79,6 +79,6 @@ public class BasketCalculatorServiceTest {
         // THEN
         Assertions.assertThat(result.getCustomerId()).isEqualTo("customer-1");
         Assertions.assertThat(result.getPricedBasketEntries()).isEqualTo(prices);
-        Assertions.assertThat(result.getTotalAmount()).isEqualByComparingTo(new BigDecimal("12.78"));
+        Assertions.assertThat(result.getTotalAmount()).isEqualByComparingTo(new BigDecimal("11.78"));
     }
 }
